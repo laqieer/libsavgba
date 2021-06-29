@@ -1,0 +1,8 @@
+*.d
+*.o
+*.a
+*.elf
+*.gba
+*.sav
+
+.DS_store
