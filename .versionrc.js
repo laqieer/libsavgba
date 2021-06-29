@@ -1,3 +1,8 @@
+const version = {
+    "filename": "VERSION",
+    "type": "plain-text"
+}
+
 module.exports = {
     "types": [
         {"type": "feat", "section": "Features"},
@@ -10,16 +15,6 @@ module.exports = {
         {"type": "test", "hidden": true},
         {"type": "revert", "hidden": true}
     ],
-    "packageFiles": [
-        {
-            "filename": "VERSION",
-            "type": "plain-text"
-        }
-    ],
-    "bumpFiles": [
-        {
-            "filename": "VERSION",
-            "type": "plain-text"
-        }
-    ]
+    "packageFiles": [version],
+    "bumpFiles": [version]
 }
