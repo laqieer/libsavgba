@@ -2,7 +2,7 @@
 #define GBA_SRAM_H
 
 enum {
-    E_SUCCESS = 0,
+    E_SUCCESS = 0, ///< No error.
     E_INVALID_PARAM, ///< Invalid input parameter.
     E_VERIFY_FAIL, ///< Failed to verify written data.
 };
