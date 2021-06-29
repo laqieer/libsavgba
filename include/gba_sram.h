@@ -19,7 +19,7 @@ enum {
 int sram_read(u32 addr, u8 *data, size_t size);
 
 /**
- * @brief Write data to sram
+ * @brief Write data to SRAM.
  *
  * @param addr address in SRAM (unit: byte).
  * @param data buffer to hold data.
