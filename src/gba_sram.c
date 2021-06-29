@@ -4,15 +4,17 @@
 
 #include "gba_sram.h"
 
+const char BackupID[] = "SRAM_Vnnn";
+
 IWRAM_CODE
-void sram_memcpy(volatile unsigned char *dst, const volatile unsigned char *src, size_t size) {
+static void sram_memcpy(volatile unsigned char *dst, const volatile unsigned char *src, size_t size) {
     for (;size > 0;--size) 
         *dst++ = *src++;
 }
 
 IWRAM_CODE
-unsigned int sram_absmemcmp(const volatile unsigned char *dst, const volatile unsigned char *src, size_t size) {
-  while (size > 0) {
+static unsigned int sram_absmemcmp(const volatile unsigned char *dst, const volatile unsigned char *src, size_t size) {
+  while (size-- > 0) {
     unsigned int a = *dst++;
     unsigned int b = *src++;
     if (a != b) 

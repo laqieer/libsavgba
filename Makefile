@@ -40,15 +40,19 @@ LIBTONC 	:= $(LIBGBA)/../libtonc
 export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) -I$(LIBGBA)/include -I$(LIBTONC)/include
 export DEPSDIR	:=	$(CURDIR)/build
 
-.PHONY: $(BUILD) clean
+.PHONY: $(BUILD) test clean
 
 $(BUILD):
 	@[ -d lib ] || mkdir -p lib
 	@[ -d $@ ] || mkdir -p $@
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
+test:
+	make -C test/*
+
 clean:
 	@rm -fr $(BUILD) lib
+	@make -C test/* clean
 
 
 #---------------------------------------------------------------------------------
