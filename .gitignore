@@ -6,3 +6,8 @@
 *.sav
 
 .DS_store
+
+.husky/
+node_modules/
+package-lock.json
+package.json
