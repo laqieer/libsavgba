@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^6.0.0",
+    "standard-version": "^9.3.0"
+  },
+  "scripts": {
+    "release": "standard-version"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
