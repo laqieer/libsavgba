@@ -10,4 +10,4 @@ A library to access various backup media in GBA cartridges
 
 `make`
 
-## [Documentation](https://laqieer.github.io/libsavgba/docs/)
+## [Documentation](https://laqieer.github.io/libsavgba/)
