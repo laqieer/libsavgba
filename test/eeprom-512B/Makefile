@@ -125,7 +125,6 @@ $(BUILD):
 
 #---------------------------------------------------------------------------------
 clean:
-	@echo clean ...
 	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).gba $(TARGET).sav
 
 

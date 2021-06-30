@@ -40,15 +40,18 @@ LIBTONC 	:= $(LIBGBA)/../libtonc
 export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) -I$(LIBGBA)/include -I$(LIBTONC)/include
 export DEPSDIR	:=	$(CURDIR)/build
 
-.PHONY: $(BUILD) test docs version pack release clean
+TESTS := $(wildcard test/*)
+
+.PHONY: $(BUILD) test docs version pack release clean $(TESTS)
 
 $(BUILD):
 	@[ -d lib ] || mkdir -p lib
 	@[ -d $@ ] || mkdir -p $@
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
-test:
-	@make -C test/*
+test: $(TESTS)
+$(TESTS):
+	$(MAKE) -C $@
 
 docs:
 	@doxygen
@@ -64,7 +67,9 @@ release:
 
 clean:
 	@rm -fr $(BUILD) lib *.zip
-	@make -C test/* clean
+	@for dir in $(TESTS); do \
+		$(MAKE) -C $$dir -f Makefile $@; \
+	done
 
 
 #---------------------------------------------------------------------------------
