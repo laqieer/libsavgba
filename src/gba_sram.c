@@ -23,11 +23,14 @@ static unsigned int sram_absmemcmp(const volatile unsigned char *dst, const vola
 }
 
 int sram_read(u32 addr, u8 *data, size_t size) {
+    if (data == NULL)
+        return E_INVALID_PARAM;
+
     if (addr > MEM_SRAM)
         addr -= MEM_SRAM;
 
-    if (addr > SRAM_SIZE || data == NULL)
-        return E_INVALID_PARAM;
+    if (addr > SRAM_SIZE)
+        return E_OUT_OF_RANGE;
 
     sram_memcpy(data, &sram_mem[addr], size);
     
@@ -35,11 +38,14 @@ int sram_read(u32 addr, u8 *data, size_t size) {
 }
 
 int sram_write(u32 addr, u8 *data, size_t size) {
+    if (data == NULL)
+        return E_INVALID_PARAM;
+
     if (addr > MEM_SRAM)
         addr -= MEM_SRAM;
 
-    if (addr > SRAM_SIZE || data == NULL)
-        return E_INVALID_PARAM;
+    if (addr > SRAM_SIZE)
+        return E_OUT_OF_RANGE;
 
     sram_memcpy(&sram_mem[addr], data, size);
 
