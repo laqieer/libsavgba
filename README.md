@@ -13,6 +13,7 @@ A library to access various backup media in GBA cartridges
 
 ## [Documentation](https://laqieer.github.io/libsavgba/)
 
+## [Source](https://github.com/laqieer/libsavgba)
 
 ## License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flaqieer%2Flibsavgba.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Flaqieer%2Flibsavgba?ref=badge_large)
