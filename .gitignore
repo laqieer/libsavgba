@@ -2,8 +2,10 @@
 *.o
 *.a
 *.elf
+*.map
 *.gba
 *.sav
+*.zip
 
 .DS_store
 
