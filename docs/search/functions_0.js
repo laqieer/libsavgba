@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['sram_5fread_7',['sram_read',['../gba__sram_8h.html#ae91ef81379986e93f5cd18821432432e',1,'gba_sram.h']]],
-  ['sram_5fwrite_8',['sram_write',['../gba__sram_8h.html#a3390ccfe253a2bdbd2ea181fd6382401',1,'gba_sram.h']]]
+  ['eeprom_5f512_5fread_16',['eeprom_512_read',['../gba__eeprom_8h.html#af12efe6e104ceab975e5deeb99219e68',1,'gba_eeprom.h']]],
+  ['eeprom_5f512_5fwrite_17',['eeprom_512_write',['../gba__eeprom_8h.html#a3f35f9905a09ddf01993f35ebbde57b4',1,'gba_eeprom.h']]],
+  ['eeprom_5f8k_5fread_18',['eeprom_8K_read',['../gba__eeprom_8h.html#a04eb62854935f66cc61514041f7097d7',1,'gba_eeprom.h']]],
+  ['eeprom_5f8k_5fwrite_19',['eeprom_8K_write',['../gba__eeprom_8h.html#afae197bbb338d143a9262e0f84413412',1,'gba_eeprom.h']]]
 ];
