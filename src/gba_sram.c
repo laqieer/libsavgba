@@ -2,7 +2,7 @@
 
 #include <tonc_memmap.h>
 
-#include "gba_sram.h"
+#include "err_def.h"
 
 const char BackupID[] = "SRAM_Vnnn";
 
