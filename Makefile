@@ -63,7 +63,7 @@ pack:
 	@zip -r $(notdir $(CURDIR))-`cat VERSION`.zip include lib LICENSE CHANGELOG.md README.md
 
 release:
-	@gh release upload v`cat VERSION` $(notdir $(CURDIR))-`cat VERSION`.zip --clobber
+	@gh release create v`cat VERSION` $(notdir $(CURDIR))-`cat VERSION`.zip -F CHANGELOG.md
 
 clean:
 	@rm -fr $(BUILD) lib *.zip
