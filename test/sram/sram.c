@@ -13,7 +13,7 @@ int main(void) {
 	tte_init_chr4c_default(0, BG_CBB(0) | BG_SBB(31));
 
     // Write Test
-    err = sram_write(0, "SRAM Test Passed!", BUFFER_SIZE);
+    err = sram_write(0, "SRAM_Vnnn\n", BUFFER_SIZE);
     if (err) {
         tte_write("SRAM Write Failed!");
         goto end;
@@ -24,9 +24,10 @@ int main(void) {
     if (err) {
         tte_write("SRAM Read Failed!");
     }
+    tte_write(buffer);
 
     // Final Result
-    tte_write(buffer);
+    tte_write("SRAM Test Passed!");
 
 end:
 	irq_init(NULL);

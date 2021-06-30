@@ -4,8 +4,6 @@
 
 #include "err_def.h"
 
-const char BackupID[] = "SRAM_Vnnn";
-
 IWRAM_CODE
 static void sram_memcpy(volatile unsigned char *dst, const volatile unsigned char *src, size_t size) {
     for (;size > 0;--size) 
