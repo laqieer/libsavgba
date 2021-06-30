@@ -89,7 +89,7 @@ int eeprom_write(u32 addr, u16 *data, int addr_width)
     }
     eeprom_memcpy(eeprom_mem, buffer, 67 + addr_width);
 
-    while(!(*eeprom_mem & 1));
+    //while(!((*eeprom_mem & 1));
 
     return 0;
 }
