@@ -167,7 +167,7 @@ int flash_read(u32 addr, u8 *data, size_t size) {
     {
         int bank = 0;
 
-        if (addr > FLASH_SIZE * 2)
+        if (addr + size > FLASH_SIZE * 2)
             return E_OUT_OF_RANGE;
 
         if (addr >= FLASH_SIZE)
@@ -179,7 +179,7 @@ int flash_read(u32 addr, u8 *data, size_t size) {
         flash_switch_bank(bank);
     }
 
-    if (addr > FLASH_SIZE)
+    if (addr + size > FLASH_SIZE)
         return E_OUT_OF_RANGE;
 
     flash_memcpy(data, &flash_mem[addr], size);
@@ -214,7 +214,7 @@ int flash_write(u32 addr, u8 *data, size_t size) {
     {
         int bank = 0;
 
-        if (addr > FLASH_SIZE * 2)
+        if (addr + size > FLASH_SIZE * 2)
             return E_OUT_OF_RANGE;
 
         if (addr >= FLASH_SIZE)
@@ -226,7 +226,7 @@ int flash_write(u32 addr, u8 *data, size_t size) {
         flash_switch_bank(bank);
     }
 
-    if (addr > FLASH_SIZE)
+    if (addr + size > FLASH_SIZE)
         return E_OUT_OF_RANGE;
 
     err = flash_erase(addr);

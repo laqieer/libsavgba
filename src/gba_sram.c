@@ -29,7 +29,7 @@ int sram_read(u32 addr, u8 *data, size_t size) {
     if (addr > MEM_SRAM)
         addr -= MEM_SRAM;
 
-    if (addr > SRAM_SIZE)
+    if (addr + size > SRAM_SIZE)
         return E_OUT_OF_RANGE;
 
     sram_memcpy(data, &sram_mem[addr], size);
@@ -44,7 +44,7 @@ int sram_write(u32 addr, u8 *data, size_t size) {
     if (addr > MEM_SRAM)
         addr -= MEM_SRAM;
 
-    if (addr > SRAM_SIZE)
+    if (addr + size > SRAM_SIZE)
         return E_OUT_OF_RANGE;
 
     sram_memcpy(&sram_mem[addr], data, size);
