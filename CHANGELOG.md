@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/laqieer/libsavgba/compare/v2.0.0...v3.0.0) (2021-07-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* add eeprom_init(), rename eeprom_512_read() and eeprom_8K_read() to eeprom_read(),
+rename eeprom_512_write() and eeprom_8K_write() to eeprom_write()
+
+### Features
+
+* add 10ms timeout for eeprom_write() ([8053a4d](https://github.com/laqieer/libsavgba/commit/8053a4dced8fc0b5c010f3be756ce10c1bd7916a))
+* unify read and write function for backup media EEPROM ([66abae8](https://github.com/laqieer/libsavgba/commit/66abae8995703028ab3aac52dbeb02c6f43136be))
+
+
+### Bug Fixes
+
+* fix detection after write data to EEPROM ([4e32a74](https://github.com/laqieer/libsavgba/commit/4e32a746f7c1c3e6251dd8552cc808444dee218f))
+* fix out of range detection ([2263825](https://github.com/laqieer/libsavgba/commit/2263825591d1e7edb0f2c7ef8c6227a7282871b8))
+
 ## [2.0.0](https://github.com/laqieer/libsavgba/compare/v1.2.0...v2.0.0) (2021-07-02)
 
 
