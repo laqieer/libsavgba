@@ -3,12 +3,15 @@
 #include <tonc.h>
 
 #include "err_def.h"
+#include "gba_eeprom.h"
 
 #define MEM_EEPROM 0x0D000000
 #define eeprom_mem ((u8*)MEM_EEPROM)
 
-#define EEPROM_512_ADDR_WIDTH 6
-#define EEPROM_8K_ADDR_WIDTH 14
+#define EEPROM_512_gEepromSize 6
+#define EEPROM_8K_gEepromSize 14
+
+u8 gEepromSize;
 
 void eeprom_memcpy(void *dst, const void *src, size_t size)
 {
@@ -20,7 +23,17 @@ void eeprom_memcpy(void *dst, const void *src, size_t size)
     REG_IME = REG_IME_old;
 }
 
-int eeprom_read(u32 addr, u16 *data, int addr_width)
+int eeprom_init(u8 size)
+{
+    if (size == EEPROM_SIZE_512B || size == EEPROM_SIZE_8KB)
+        gEepromSize = size;
+    else
+        return E_UNSUPPORTED_DEVICE;
+
+    return 0;
+}
+
+int eeprom_read(u32 addr, u16 *data)
 {
     u16 buffer[68];
 
@@ -29,20 +42,20 @@ int eeprom_read(u32 addr, u16 *data, int addr_width)
         return E_INVALID_PARAM;
     }
 
-    if (addr >= 1 << addr_width)
+    if (addr >= 1 << gEepromSize)
     {
         return E_OUT_OF_RANGE;
     }
 
     buffer[0] = 1;
     buffer[1] = 1;
-    buffer[2 + addr_width] = 0;
-    for (int i = 1 + addr_width; i >= 2; i--)
+    buffer[2 + gEepromSize] = 0;
+    for (int i = 1 + gEepromSize; i >= 2; i--)
     {
         buffer[i] = addr & 1;
         addr = addr >> 1;
     }
-    eeprom_memcpy(eeprom_mem, buffer, 3 + addr_width);
+    eeprom_memcpy(eeprom_mem, buffer, 3 + gEepromSize);
 
     eeprom_memcpy(buffer, eeprom_mem, 68);
 
@@ -58,7 +71,7 @@ int eeprom_read(u32 addr, u16 *data, int addr_width)
     return 0;
 }
 
-int eeprom_write(u32 addr, u16 *data, int addr_width)
+int eeprom_write(u32 addr, u16 *data)
 {
     u16 buffer[81];
 
@@ -67,15 +80,15 @@ int eeprom_write(u32 addr, u16 *data, int addr_width)
         return E_INVALID_PARAM;
     }
 
-    if (addr >= 1 << addr_width)
+    if (addr >= 1 << gEepromSize)
     {
         return E_OUT_OF_RANGE;
     }
 
     buffer[0] = 1;
     buffer[1] = 0;
-    buffer[66 + addr_width] = 0;
-    for (int i = 1 + addr_width; i >= 2; i--)
+    buffer[66 + gEepromSize] = 0;
+    for (int i = 1 + gEepromSize; i >= 2; i--)
     {
         buffer[i] = addr & 1;
         addr = addr >> 1;
@@ -84,32 +97,12 @@ int eeprom_write(u32 addr, u16 *data, int addr_width)
     {
         for (int j = 0; j < 16; j++)
         {
-            buffer[65 + addr_width - 16 * i - j] = (data[i] >> j) & 1;
+            buffer[65 + gEepromSize - 16 * i - j] = (data[i] >> j) & 1;
         }
     }
-    eeprom_memcpy(eeprom_mem, buffer, 67 + addr_width);
+    eeprom_memcpy(eeprom_mem, buffer, 67 + gEepromSize);
 
     //while(!((*eeprom_mem & 1));
 
     return 0;
-}
-
-int eeprom_512_read(u32 addr, u16 *data)
-{
-    return eeprom_read(addr, data, EEPROM_512_ADDR_WIDTH);
-}
-
-int eeprom_512_write(u32 addr, u16 *data)
-{
-    return eeprom_write(addr, data, EEPROM_512_ADDR_WIDTH);
-}
-
-int eeprom_8K_read(u32 addr, u16 *data)
-{
-    return eeprom_read(addr, data, EEPROM_8K_ADDR_WIDTH);
-}
-
-int eeprom_8K_write(u32 addr, u16 *data)
-{
-    return eeprom_write(addr, data, EEPROM_8K_ADDR_WIDTH);
 }
