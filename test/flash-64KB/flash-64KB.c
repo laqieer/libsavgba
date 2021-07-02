@@ -15,7 +15,7 @@ int main(void) {
     tte_init_con();
 
     // Init Flash
-    err = flash_init();
+    err = flash_init(FLASH_SIZE_64KB);
     if (err) {
         tte_printf("Flash(64KB) Init Error: %d\n", err);
         goto end;
