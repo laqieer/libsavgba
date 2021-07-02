@@ -113,7 +113,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:aff94b5e5322c8d6944577eb78290387c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init Flash chip.  <a href="gba__flash_8h.html#aff94b5e5322c8d6944577eb78290387c">More...</a><br /></td></tr>
 <tr class="separator:aff94b5e5322c8d6944577eb78290387c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72a5873c0849104c17b408a6f4a342cf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gba__flash_8h.html#a72a5873c0849104c17b408a6f4a342cf">flash_reset</a> ()</td></tr>
-<tr class="memdesc:a72a5873c0849104c17b408a6f4a342cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erases all memory in chip, erased memory is FFh-filled.  <a href="gba__flash_8h.html#a72a5873c0849104c17b408a6f4a342cf">More...</a><br /></td></tr>
+<tr class="memdesc:a72a5873c0849104c17b408a6f4a342cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset Flash chip.  <a href="gba__flash_8h.html#a72a5873c0849104c17b408a6f4a342cf">More...</a><br /></td></tr>
 <tr class="separator:a72a5873c0849104c17b408a6f4a342cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2290d15f7440e9aff7c210569f80ea96"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gba__flash_8h.html#a2290d15f7440e9aff7c210569f80ea96">flash_read</a> (u32 addr, u8 *data, size_t size)</td></tr>
 <tr class="memdesc:a2290d15f7440e9aff7c210569f80ea96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read data from Flash (size: 64KB/128KB).  <a href="gba__flash_8h.html#a2290d15f7440e9aff7c210569f80ea96">More...</a><br /></td></tr>
@@ -283,7 +283,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Erases all memory in chip, erased memory is FFh-filled. </p>
+<p>Reset Flash chip. </p>
+<p>Erases all memory in chip, erased memory is FFh-filled.</p>
 <dl class="section return"><dt>Returns</dt><dd><code>0</code> for success, <code>non-zero</code> for error. </dd></dl>
 
 </div>
@@ -321,6 +322,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Write data to Flash (size: 64KB/128KB). </p>
+<p><b>Target sector will be erased.</b></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">addr</td><td>address in Flash (unit: byte). </td></tr>

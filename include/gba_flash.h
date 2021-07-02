@@ -45,7 +45,9 @@ enum {
 int flash_init(u8 size);
 
 /**
- * @brief Erases all memory in chip, erased memory is FFh-filled.
+ * @brief Reset Flash chip.
+ *
+ * Erases all memory in chip, erased memory is FFh-filled.
  *
  * @return \c 0 for success, \c non-zero for error.
  */
@@ -64,6 +66,8 @@ int flash_read(u32 addr, u8 *data, size_t size);
 
 /**
  * @brief Write data to Flash (size: 64KB/128KB).
+ *
+ * **Target sector will be erased.**
  *
  * @param addr address in Flash (unit: byte).
  * @param data buffer to hold data.
