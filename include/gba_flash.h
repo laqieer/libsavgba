@@ -36,9 +36,10 @@ enum {
 /**
  * @brief Init Flash chip.
  *
- * Detect the type (and presence) of FLASH chips. *It should be called once at first.*
+ * Detect the type (and presence) of FLASH chips. **It should be called once at first.**
  *
  * @param size Flash chip size (\c FLASH_SIZE_AUTO / \c FLASH_SIZE_64KB / \c FLASH_SIZE_128KB). Use \c FLASH_SIZE_AUTO if you don't know.
+ *
  * @return \c 0 for success, \c non-zero for error.
  */
 int flash_init(u8 size);
