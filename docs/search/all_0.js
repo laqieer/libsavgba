@@ -6,9 +6,10 @@ var searchData=
   ['e_5ftimeout_3',['E_TIMEOUT',['../err__def_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba0bc27e0d9f5ecbf8ee1468a90724e088',1,'err_def.h']]],
   ['e_5funsupported_5fdevice_4',['E_UNSUPPORTED_DEVICE',['../err__def_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba5a0a6eaf461148a87347243490149da7',1,'err_def.h']]],
   ['e_5fverify_5ffail_5',['E_VERIFY_FAIL',['../err__def_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba4dcea7ec7e6647fcf78a4d795f847206',1,'err_def.h']]],
-  ['eeprom_5f512_5fread_6',['eeprom_512_read',['../gba__eeprom_8h.html#af12efe6e104ceab975e5deeb99219e68',1,'gba_eeprom.h']]],
-  ['eeprom_5f512_5fwrite_7',['eeprom_512_write',['../gba__eeprom_8h.html#a3f35f9905a09ddf01993f35ebbde57b4',1,'gba_eeprom.h']]],
-  ['eeprom_5f8k_5fread_8',['eeprom_8K_read',['../gba__eeprom_8h.html#a04eb62854935f66cc61514041f7097d7',1,'gba_eeprom.h']]],
-  ['eeprom_5f8k_5fwrite_9',['eeprom_8K_write',['../gba__eeprom_8h.html#afae197bbb338d143a9262e0f84413412',1,'gba_eeprom.h']]],
-  ['err_5fdef_2eh_10',['err_def.h',['../err__def_8h.html',1,'']]]
+  ['eeprom_5finit_6',['eeprom_init',['../gba__eeprom_8h.html#a02f6958b12e25c2f4a7e9760d6a83dc1',1,'gba_eeprom.h']]],
+  ['eeprom_5fread_7',['eeprom_read',['../gba__eeprom_8h.html#a2d8ba544f7b5b7674f1c73f4bdf323c0',1,'gba_eeprom.h']]],
+  ['eeprom_5fsize_5f512b_8',['EEPROM_SIZE_512B',['../gba__eeprom_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ab2fcdb2e599c20e95625537db8c37076',1,'gba_eeprom.h']]],
+  ['eeprom_5fsize_5f8kb_9',['EEPROM_SIZE_8KB',['../gba__eeprom_8h.html#adf764cbdea00d65edcd07bb9953ad2b7adbdba9cf5f2467f6d5d2f2493000b335',1,'gba_eeprom.h']]],
+  ['eeprom_5fwrite_10',['eeprom_write',['../gba__eeprom_8h.html#ac56a0554dbeff5d17c677df660cb5dba',1,'gba_eeprom.h']]],
+  ['err_5fdef_2eh_11',['err_def.h',['../err__def_8h.html',1,'']]]
 ];

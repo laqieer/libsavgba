@@ -66,6 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">gba_eeprom.h File Reference</div>  </div>
@@ -74,30 +75,86 @@ $(function() {
 
 <p><a href="gba__eeprom_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:adf764cbdea00d65edcd07bb9953ad2b7"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <a class="el" href="gba__eeprom_8h.html#adf764cbdea00d65edcd07bb9953ad2b7ab2fcdb2e599c20e95625537db8c37076">EEPROM_SIZE_512B</a> = 6
+, <a class="el" href="gba__eeprom_8h.html#adf764cbdea00d65edcd07bb9953ad2b7adbdba9cf5f2467f6d5d2f2493000b335">EEPROM_SIZE_8KB</a> = 14
+ }</td></tr>
+<tr class="memdesc:adf764cbdea00d65edcd07bb9953ad2b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">EEPROM chip size.  <a href="gba__eeprom_8h.html#adf764cbdea00d65edcd07bb9953ad2b7">More...</a><br /></td></tr>
+<tr class="separator:adf764cbdea00d65edcd07bb9953ad2b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af12efe6e104ceab975e5deeb99219e68"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gba__eeprom_8h.html#af12efe6e104ceab975e5deeb99219e68">eeprom_512_read</a> (u32 addr, u16 *data)</td></tr>
-<tr class="memdesc:af12efe6e104ceab975e5deeb99219e68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read data from EEPROM (size: 512B).  <a href="gba__eeprom_8h.html#af12efe6e104ceab975e5deeb99219e68">More...</a><br /></td></tr>
-<tr class="separator:af12efe6e104ceab975e5deeb99219e68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f35f9905a09ddf01993f35ebbde57b4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gba__eeprom_8h.html#a3f35f9905a09ddf01993f35ebbde57b4">eeprom_512_write</a> (u32 addr, u16 *data)</td></tr>
-<tr class="memdesc:a3f35f9905a09ddf01993f35ebbde57b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write data to EEPROM (size: 512B).  <a href="gba__eeprom_8h.html#a3f35f9905a09ddf01993f35ebbde57b4">More...</a><br /></td></tr>
-<tr class="separator:a3f35f9905a09ddf01993f35ebbde57b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04eb62854935f66cc61514041f7097d7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gba__eeprom_8h.html#a04eb62854935f66cc61514041f7097d7">eeprom_8K_read</a> (u32 addr, u16 *data)</td></tr>
-<tr class="memdesc:a04eb62854935f66cc61514041f7097d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read data from EEPROM (size: 8KB).  <a href="gba__eeprom_8h.html#a04eb62854935f66cc61514041f7097d7">More...</a><br /></td></tr>
-<tr class="separator:a04eb62854935f66cc61514041f7097d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afae197bbb338d143a9262e0f84413412"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gba__eeprom_8h.html#afae197bbb338d143a9262e0f84413412">eeprom_8K_write</a> (u32 addr, u16 *data)</td></tr>
-<tr class="memdesc:afae197bbb338d143a9262e0f84413412"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write data to EEPROM (size: 8KB).  <a href="gba__eeprom_8h.html#afae197bbb338d143a9262e0f84413412">More...</a><br /></td></tr>
-<tr class="separator:afae197bbb338d143a9262e0f84413412"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02f6958b12e25c2f4a7e9760d6a83dc1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gba__eeprom_8h.html#a02f6958b12e25c2f4a7e9760d6a83dc1">eeprom_init</a> (u8 size)</td></tr>
+<tr class="memdesc:a02f6958b12e25c2f4a7e9760d6a83dc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init EEPROM chip.  <a href="gba__eeprom_8h.html#a02f6958b12e25c2f4a7e9760d6a83dc1">More...</a><br /></td></tr>
+<tr class="separator:a02f6958b12e25c2f4a7e9760d6a83dc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d8ba544f7b5b7674f1c73f4bdf323c0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gba__eeprom_8h.html#a2d8ba544f7b5b7674f1c73f4bdf323c0">eeprom_read</a> (u32 addr, u16 *data)</td></tr>
+<tr class="memdesc:a2d8ba544f7b5b7674f1c73f4bdf323c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read data from EEPROM.  <a href="gba__eeprom_8h.html#a2d8ba544f7b5b7674f1c73f4bdf323c0">More...</a><br /></td></tr>
+<tr class="separator:a2d8ba544f7b5b7674f1c73f4bdf323c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac56a0554dbeff5d17c677df660cb5dba"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gba__eeprom_8h.html#ac56a0554dbeff5d17c677df660cb5dba">eeprom_write</a> (u32 addr, u16 *data)</td></tr>
+<tr class="memdesc:ac56a0554dbeff5d17c677df660cb5dba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write data to EEPROM.  <a href="gba__eeprom_8h.html#ac56a0554dbeff5d17c677df660cb5dba">More...</a><br /></td></tr>
+<tr class="separator:ac56a0554dbeff5d17c677df660cb5dba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="adf764cbdea00d65edcd07bb9953ad2b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf764cbdea00d65edcd07bb9953ad2b7">&#9670;&nbsp;</a></span>anonymous enum</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">anonymous enum</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>EEPROM chip size. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="adf764cbdea00d65edcd07bb9953ad2b7ab2fcdb2e599c20e95625537db8c37076"></a>EEPROM_SIZE_512B&#160;</td><td class="fielddoc"><p>512B (4Kbit) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="adf764cbdea00d65edcd07bb9953ad2b7adbdba9cf5f2467f6d5d2f2493000b335"></a>EEPROM_SIZE_8KB&#160;</td><td class="fielddoc"><p>8KB (64K) </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="af12efe6e104ceab975e5deeb99219e68"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af12efe6e104ceab975e5deeb99219e68">&#9670;&nbsp;</a></span>eeprom_512_read()</h2>
+<a id="a02f6958b12e25c2f4a7e9760d6a83dc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02f6958b12e25c2f4a7e9760d6a83dc1">&#9670;&nbsp;</a></span>eeprom_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int eeprom_512_read </td>
+          <td class="memname">int eeprom_init </td>
+          <td>(</td>
+          <td class="paramtype">u8&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Init EEPROM chip. </p>
+<p>Set the size of EEPROM chip. <b>It should be called once at first.</b></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>EEPROM chip size (<code>EEPROM_SIZE_512B</code> / <code>EEPROM_SIZE_8KB</code>).</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>0</code> for success, <code>non-zero</code> for error. </dd></dl>
+
+</div>
+</div>
+<a id="a2d8ba544f7b5b7674f1c73f4bdf323c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d8ba544f7b5b7674f1c73f4bdf323c0">&#9670;&nbsp;</a></span>eeprom_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int eeprom_read </td>
           <td>(</td>
           <td class="paramtype">u32&#160;</td>
           <td class="paramname"><em>addr</em>, </td>
@@ -116,7 +173,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Read data from EEPROM (size: 512B). </p>
+<p>Read data from EEPROM. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">addr</td><td>address in EEPROM (unit: 8 bytes). </td></tr>
@@ -128,14 +185,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3f35f9905a09ddf01993f35ebbde57b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f35f9905a09ddf01993f35ebbde57b4">&#9670;&nbsp;</a></span>eeprom_512_write()</h2>
+<a id="ac56a0554dbeff5d17c677df660cb5dba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac56a0554dbeff5d17c677df660cb5dba">&#9670;&nbsp;</a></span>eeprom_write()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int eeprom_512_write </td>
+          <td class="memname">int eeprom_write </td>
           <td>(</td>
           <td class="paramtype">u32&#160;</td>
           <td class="paramname"><em>addr</em>, </td>
@@ -154,83 +211,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Write data to EEPROM (size: 512B). </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">addr</td><td>address in EEPROM (unit: 8 bytes). </td></tr>
-    <tr><td class="paramname">data</td><td>buffer to hold data (size: a unit = 8 bytes).</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><code>0</code> for success, <code>non-zero</code> for error. </dd></dl>
-
-</div>
-</div>
-<a id="a04eb62854935f66cc61514041f7097d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a04eb62854935f66cc61514041f7097d7">&#9670;&nbsp;</a></span>eeprom_8K_read()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int eeprom_8K_read </td>
-          <td>(</td>
-          <td class="paramtype">u32&#160;</td>
-          <td class="paramname"><em>addr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">u16 *&#160;</td>
-          <td class="paramname"><em>data</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read data from EEPROM (size: 8KB). </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">addr</td><td>address in EEPROM (unit: 8 bytes). </td></tr>
-    <tr><td class="paramname">data</td><td>buffer to hold data (size: a unit = 8 bytes).</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><code>0</code> for success, <code>non-zero</code> for error. </dd></dl>
-
-</div>
-</div>
-<a id="afae197bbb338d143a9262e0f84413412"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afae197bbb338d143a9262e0f84413412">&#9670;&nbsp;</a></span>eeprom_8K_write()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int eeprom_8K_write </td>
-          <td>(</td>
-          <td class="paramtype">u32&#160;</td>
-          <td class="paramname"><em>addr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">u16 *&#160;</td>
-          <td class="paramname"><em>data</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Write data to EEPROM (size: 8KB). </p>
+<p>Write data to EEPROM. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">addr</td><td>address in EEPROM (unit: 8 bytes). </td></tr>
