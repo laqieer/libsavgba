@@ -18,7 +18,7 @@ ARCH	:=	-mthumb -mthumb-interwork
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
-CFLAGS	:=	-g -O3 -Wall -Wno-switch -Wno-multichar $(ARCH) $(INCLUDE)
+CFLAGS	:=	-g -O3 -Wall -Wno-switch -Wno-multichar -Wno-stringop-overflow $(ARCH) $(INCLUDE)
 ASFLAGS	:=	-g -Wa,--warn $(ARCH)
 
 #---------------------------------------------------------------------------------
