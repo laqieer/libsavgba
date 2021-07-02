@@ -11,6 +11,9 @@
 #define EEPROM_512_gEepromSize 6
 #define EEPROM_8K_gEepromSize 14
 
+#define LOOP_CNT_PER_MILLI_SECOND 1000
+#define EEPROM_WRITE_TIMEOUT_BY_MILLI_SECOND 10
+
 u8 gEepromSize;
 
 void eeprom_memcpy(volatile void *dst, volatile const void *src, size_t size)
@@ -103,7 +106,10 @@ int eeprom_write(u32 addr, u16 *data)
     eeprom_memcpy(eeprom_mem, buffer, 67 + gEepromSize);
 
     // After the DMA, keep reading from the chip, by normal LDRH [D000000h], until Bit 0 of the returned data becomes “1” (Ready).
-    while(!(*eeprom_mem & 1));
+    // To prevent your program from locking up in case of malfunction, generate a timeout if the chip does not reply after 10ms or longer. 
+    for (vu32 i = 0; i < LOOP_CNT_PER_MILLI_SECOND * EEPROM_WRITE_TIMEOUT_BY_MILLI_SECOND; i++)
+        if (*eeprom_mem & 1)
+            return 0;
 
-    return 0;
+    return E_TIMEOUT;
 }
