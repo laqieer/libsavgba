@@ -4,7 +4,7 @@
 /**
  * @brief Flash chip size.
  */
-enum {
+enum FlashSize {
     FLASH_SIZE_AUTO = 0, ///< Auto-detect
     FLASH_SIZE_64KB, ///< 64KB(512Kb)
     FLASH_SIZE_128KB, ///< 128KB(1Mb)
@@ -13,7 +13,7 @@ enum {
 /**
  * @brief Flash chip manufacturer.
  */
-enum {
+enum FlashManufacturer {
     FLASH_MFR_ATMEL = 0x1F,
     FLASH_MFR_PANASONIC = 0x32,
     FLASH_MFR_SANYO = 0x62,
@@ -24,7 +24,7 @@ enum {
 /**
  * @brief Flash chip device code.
  */
-enum {
+enum FlashDevice {
     FLASH_DEV_MX29L010 = 0x09,
     FLASH_DEV_LE26FV10N1TS = 0x13,
     FLASH_DEV_MN63F805MNP = 0x1B,

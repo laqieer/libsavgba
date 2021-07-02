@@ -4,7 +4,7 @@
 /**
  * @brief EEPROM chip size.
  */
-enum {
+enum EepromSize {
     EEPROM_SIZE_512B = 6, ///< 512B (4Kbit)
     EEPROM_SIZE_8KB = 14, ///< 8KB (64K)
 };
