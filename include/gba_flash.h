@@ -2,6 +2,15 @@
 #define GBA_Flash_H
 
 /**
+ * @brief Flash chip size.
+ */
+enum {
+    FLASH_SIZE_AUTO = 0, ///< Auto-detect
+    FLASH_SIZE_64KB, ///< 64KB(512Kb)
+    FLASH_SIZE_128KB, ///< 128KB(1Mb)
+};
+
+/**
  * @brief Flash chip manufacturer.
  */
 enum {
@@ -25,11 +34,14 @@ enum {
 };
 
 /**
- * @brief Detect the type (and presence) of FLASH chips.
+ * @brief Init Flash chip.
  *
+ * Detect the type (and presence) of FLASH chips. *It should be called once at first.*
+ *
+ * @param size Flash chip size (\c FLASH_SIZE_AUTO / \c FLASH_SIZE_64KB / \c FLASH_SIZE_128KB). Use \c FLASH_SIZE_AUTO if you don't know.
  * @return \c 0 for success, \c non-zero for error.
  */
-int flash_init();
+int flash_init(u8 size);
 
 /**
  * @brief Erases all memory in chip, erased memory is FFh-filled.

@@ -16,6 +16,7 @@ const unsigned char erased_byte_value = 0xFF;
 struct FlashInfo {
     u8 device;
     u8 manufacturer;
+    u8 size;
 } gFlashInfo;
 
 IWRAM_CODE
@@ -58,7 +59,7 @@ static int wait_until(u32 addr, const u8 *data, int timeout) {
 }
 
 // Chip Identification (all device types)
-int flash_init() {
+int flash_init(u8 size) {
     // Use 8 clk waitstates for initial detection (WAITCNT Bits 0,1 both set). After detection of certain device types smaller wait values may be used for write/erase, and even smaller wait values for raw reading, see Device Types table.
     REG_WAITCNT |= WS_SRAM_8;
 
@@ -87,12 +88,23 @@ int flash_init() {
     if (gFlashInfo.manufacturer == FLASH_MFR_SANYO)
         flash_mem[0x5555] = 0xF0;
 
-    //if (!((gFlashInfo.manufacturer == FLASH_MFR_ATMEL && gFlashInfo.device == FLASH_DEV_AT29LV512) || 
-    //        (gFlashInfo.manufacturer == FLASH_MFR_PANASONIC && gFlashInfo.device == FLASH_DEV_MN63F805MNP) || 
-    //        (gFlashInfo.manufacturer == FLASH_MFR_SANYO && gFlashInfo.device == FLASH_DEV_LE26FV10N1TS) || 
-    //        (gFlashInfo.manufacturer == FLASH_MFR_SST && gFlashInfo.device == FLASH_DEV_LE39FW512) || 
-    //        (gFlashInfo.manufacturer == FLASH_MFR_MACRONIX && (gFlashInfo.device == FLASH_DEV_MX29L512 || gFlashInfo.device == FLASH_DEV_MX29L010))))
-    //    return E_UNSUPPORTED_gFlashInfo.device;
+    gFlashInfo.size = 0;
+
+    if ((gFlashInfo.manufacturer == FLASH_MFR_MACRONIX && gFlashInfo.device == FLASH_DEV_MX29L512) || 
+            (gFlashInfo.manufacturer == FLASH_MFR_PANASONIC && gFlashInfo.device == FLASH_DEV_MN63F805MNP) || 
+            (gFlashInfo.manufacturer == FLASH_MFR_SST && gFlashInfo.device == FLASH_DEV_LE39FW512) || 
+            (gFlashInfo.manufacturer == FLASH_MFR_ATMEL && gFlashInfo.device == FLASH_DEV_AT29LV512))
+        gFlashInfo.size = FLASH_SIZE_64KB;
+
+    if ((gFlashInfo.manufacturer == FLASH_MFR_MACRONIX && gFlashInfo.device == FLASH_DEV_MX29L010) || 
+            (gFlashInfo.manufacturer == FLASH_MFR_SANYO && gFlashInfo.device == FLASH_DEV_LE26FV10N1TS))
+        gFlashInfo.size = FLASH_SIZE_128KB;
+
+    if (size)
+        gFlashInfo.size = size;
+    
+    if (!gFlashInfo.size)
+        return E_UNSUPPORTED_DEVICE;
 
     return 0;
 }
@@ -132,6 +144,17 @@ int flash_erase(u32 addr) {
     return wait_until(addr, &erased_byte_value, 20);
 }
 
+// Bank Switching (devices bigger than 64K only)
+void flash_switch_bank(int bank) {
+    // select bank command
+    flash_mem[0x5555] = 0xAA;
+    flash_mem[0x2AAA] = 0x55;
+    flash_mem[0x5555] = 0xB0;
+
+    // write bank number 0..1
+    flash_mem[0] = bank;
+}
+
 // Reading Data Bytes (all device types)
 int flash_read(u32 addr, u8 *data, size_t size) {
     if (data == NULL)
@@ -139,6 +162,22 @@ int flash_read(u32 addr, u8 *data, size_t size) {
 
     if (addr > MEM_FLASH)
         addr -= MEM_FLASH;
+
+    if (gFlashInfo.size == FLASH_SIZE_128KB)
+    {
+        int bank = 0;
+
+        if (addr > FLASH_SIZE * 2)
+            return E_OUT_OF_RANGE;
+
+        if (addr >= FLASH_SIZE)
+        {
+            bank = 1;
+            addr -= FLASH_SIZE;
+        }
+
+        flash_switch_bank(bank);
+    }
 
     if (addr > FLASH_SIZE)
         return E_OUT_OF_RANGE;
@@ -170,6 +209,22 @@ int flash_write(u32 addr, u8 *data, size_t size) {
 
     if (addr > MEM_FLASH)
         addr -= MEM_FLASH;
+
+    if (gFlashInfo.size == FLASH_SIZE_128KB)
+    {
+        int bank = 0;
+
+        if (addr > FLASH_SIZE * 2)
+            return E_OUT_OF_RANGE;
+
+        if (addr >= FLASH_SIZE)
+        {
+            bank = 1;
+            addr -= FLASH_SIZE;
+        }
+
+        flash_switch_bank(bank);
+    }
 
     if (addr > FLASH_SIZE)
         return E_OUT_OF_RANGE;
