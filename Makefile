@@ -63,6 +63,7 @@ pack:
 	@zip -r $(notdir $(CURDIR))-`cat VERSION`.zip include lib LICENSE CHANGELOG.md README.md
 
 release:
+	@git push --follow-tags origin main
 	@gh release create v`cat VERSION` $(notdir $(CURDIR))-`cat VERSION`.zip -F CHANGELOG.md
 
 clean:
