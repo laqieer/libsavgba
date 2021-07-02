@@ -6,14 +6,14 @@
 #include "gba_eeprom.h"
 
 #define MEM_EEPROM 0x0D000000
-#define eeprom_mem ((u8*)MEM_EEPROM)
+#define eeprom_mem ((vu16*)MEM_EEPROM)
 
 #define EEPROM_512_gEepromSize 6
 #define EEPROM_8K_gEepromSize 14
 
 u8 gEepromSize;
 
-void eeprom_memcpy(void *dst, const void *src, size_t size)
+void eeprom_memcpy(volatile void *dst, volatile const void *src, size_t size)
 {
     u16 REG_IME_old = REG_IME;
     REG_IME = 0;
@@ -102,7 +102,8 @@ int eeprom_write(u32 addr, u16 *data)
     }
     eeprom_memcpy(eeprom_mem, buffer, 67 + gEepromSize);
 
-    //while(!((*eeprom_mem & 1));
+    // After the DMA, keep reading from the chip, by normal LDRH [D000000h], until Bit 0 of the returned data becomes “1” (Ready).
+    while(!(*eeprom_mem & 1));
 
     return 0;
 }
