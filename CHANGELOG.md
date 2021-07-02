@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/laqieer/libsavgba/compare/v1.1.0...v1.2.0) (2021-07-02)
+
+
+### Features
+
+* add backup media support for 64KB Flash ([e104422](https://github.com/laqieer/libsavgba/commit/e10442283b73391c42d1b8edf57650e5b23f8c83))
+
 ## [1.1.0](https://github.com/laqieer/libsavgba/compare/v1.0.0...v1.1.0) (2021-06-30)
 
 
