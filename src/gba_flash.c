@@ -13,8 +13,10 @@
 
 const unsigned char erased_byte_value = 0xFF;
 
-u8 device;
-u8 manufacturer;
+struct FlashInfo {
+    u8 device;
+    u8 manufacturer;
+} gFlashInfo;
 
 IWRAM_CODE
 static void flash_memcpy(volatile unsigned char *dst, const volatile unsigned char *src, size_t size) {
@@ -45,7 +47,7 @@ static int wait_until(u32 addr, const u8 *data, int timeout) {
 
     if (flash_absmemcmp(&flash_mem[addr], data, 1)) {
         // Terminate Command after Timeout (only Macronix devices, ID=1CC2h)
-        if (manufacturer == FLASH_MFR_MACRONIX && device == FLASH_DEV_MX29L512)
+        if (gFlashInfo.manufacturer == FLASH_MFR_MACRONIX && gFlashInfo.device == FLASH_DEV_MX29L512)
             // force end of write/erase command
             flash_mem[0x5555] = 0xF0;
 
@@ -69,8 +71,8 @@ int flash_init() {
     wait(20);
 
     // get device & manufacturer
-    flash_memcpy(&device, &flash_mem[1], 1);
-    flash_memcpy(&manufacturer, &flash_mem[0], 1);
+    flash_memcpy(&gFlashInfo.device, &flash_mem[1], 1);
+    flash_memcpy(&gFlashInfo.manufacturer, &flash_mem[0], 1);
 
     // terminate ID mode
     flash_mem[0x5555] = 0xAA;
@@ -82,15 +84,15 @@ int flash_init() {
 
     // 128K sanyo flash needs to have the "exit ID mode" written TWICE to work. If you only write it once, it will not exit ID mode.
     // 64K sanyo flash has the same device/manufacturer ID as the SST part.
-    if (manufacturer == FLASH_MFR_SANYO)
+    if (gFlashInfo.manufacturer == FLASH_MFR_SANYO)
         flash_mem[0x5555] = 0xF0;
 
-    //if (!((manufacturer == FLASH_MFR_ATMEL && device == FLASH_DEV_AT29LV512) || 
-    //        (manufacturer == FLASH_MFR_PANASONIC && device == FLASH_DEV_MN63F805MNP) || 
-    //        (manufacturer == FLASH_MFR_SANYO && device == FLASH_DEV_LE26FV10N1TS) || 
-    //        (manufacturer == FLASH_MFR_SST && device == FLASH_DEV_LE39FW512) || 
-    //        (manufacturer == FLASH_MFR_MACRONIX && (device == FLASH_DEV_MX29L512 || device == FLASH_DEV_MX29L010))))
-    //    return E_UNSUPPORTED_DEVICE;
+    //if (!((gFlashInfo.manufacturer == FLASH_MFR_ATMEL && gFlashInfo.device == FLASH_DEV_AT29LV512) || 
+    //        (gFlashInfo.manufacturer == FLASH_MFR_PANASONIC && gFlashInfo.device == FLASH_DEV_MN63F805MNP) || 
+    //        (gFlashInfo.manufacturer == FLASH_MFR_SANYO && gFlashInfo.device == FLASH_DEV_LE26FV10N1TS) || 
+    //        (gFlashInfo.manufacturer == FLASH_MFR_SST && gFlashInfo.device == FLASH_DEV_LE39FW512) || 
+    //        (gFlashInfo.manufacturer == FLASH_MFR_MACRONIX && (gFlashInfo.device == FLASH_DEV_MX29L512 || gFlashInfo.device == FLASH_DEV_MX29L010))))
+    //    return E_UNSUPPORTED_gFlashInfo.device;
 
     return 0;
 }
