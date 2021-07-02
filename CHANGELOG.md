@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/laqieer/libsavgba/compare/v1.2.0...v2.0.0) (2021-07-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* add a parameter to specify the flash size to flash_init(), just pass `0` if you
+don't want to specify it, then it will be detected automatically by flash chip identification
+operation
+
+### Features
+
+* add backup media support for 128KB Flash ([faefc2b](https://github.com/laqieer/libsavgba/commit/faefc2bcdf0586a17affb70fb2ad4587faf6d432))
+
 ## [1.2.0](https://github.com/laqieer/libsavgba/compare/v1.1.0...v1.2.0) (2021-07-02)
 
 
