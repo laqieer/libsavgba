@@ -27,6 +27,10 @@ A library to access various backup media in GBA cartridges
 |[EverDrive-GBA X5](https://krikzz.com/store/home/42-everdrive-gba-x5.html)|✔|✔|✘|✔|✔|
 |[SuperCard MINI SD](http://chn.supercard.sc/manual/mini_sd.htm)|✔|✘|✘|✘|✘|
 
+*EverDrive-GBA X5 doesn't support 8KB EEPROM.*
+
+*SuperCard MINI SD only supports SRAM.*
+
 ## [Documentation](https://laqieer.github.io/libsavgba/)
 
 ## [Source](https://github.com/laqieer/libsavgba)
