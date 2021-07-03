@@ -12,6 +12,7 @@
 #define LOOP_CNT_PER_MILLI_SECOND 1000
 
 const unsigned char erased_byte_value = 0xFF;
+const unsigned char erased_byte_value_vba = 0;
 
 struct FlashInfo {
     u8 device;
@@ -111,6 +112,8 @@ int flash_init(u8 size) {
 
 // Erase Entire Chip (all device types)
 int flash_reset() {
+    int err;
+
     // erase command
     flash_mem[0x5555] = 0xAA;
     flash_mem[0x2AAA] = 0x55;
@@ -122,11 +125,18 @@ int flash_reset() {
     flash_mem[0x5555] = 0x10;
 
     // wait until [E000000h]=FFh (or timeout)
-    return wait_until(0, &erased_byte_value, 20);
+    err = wait_until(0, &erased_byte_value, 20);
+    // vba/vba-m fills erased memory with zeros. https://github.com/visualboyadvance-m/visualboyadvance-m/pull/855
+    if (err)
+        return wait_until(0, &erased_byte_value_vba, 20);
+
+    return 0;
 }
 
 // Erase 4Kbyte Sector (all device types, except Atmel)
 int flash_erase(u32 addr) {
+    int err;
+
     // sector size: 4KB
     addr &= 0xF000;
 
@@ -141,7 +151,12 @@ int flash_erase(u32 addr) {
     flash_mem[addr] = 0x30;
 
     // wait until [E00n000h]=FFh (or timeout)
-    return wait_until(addr, &erased_byte_value, 20);
+    err = wait_until(addr, &erased_byte_value, 20);
+    // vba/vba-m fills erased memory with zeros. https://github.com/visualboyadvance-m/visualboyadvance-m/pull/855
+    if (err)
+        return wait_until(0, &erased_byte_value_vba, 20);
+
+    return 0;
 }
 
 // Bank Switching (devices bigger than 64K only)

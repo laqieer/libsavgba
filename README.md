@@ -14,10 +14,10 @@ A library to access various backup media in GBA cartridges
 |Save Type|SRAM|EEPROM(512B)|EEPROM(8KB)|Flash(64KB)|Flash(128KB)|
 |---|---|---|---|---|---|
 |[mGBA](https://mgba.io/)|✔|✔|✔|✔|✔|
-|[VisualBoyAdvance-M](https://vba-m.com/)|✔|✔|✔|✘|✘|
+|[VisualBoyAdvance-M](https://vba-m.com/)|✔|✔|✔|✔|✔|
 |[NanoBoyAdvance](https://github.com/fleroviux/NanoBoyAdvance)|✔|✔|✔|✔|✔|
 |[No$GBA](https://www.nogba.com/)|✔|✔|✔|✔|✔|
-|[VisualBoyAdvance](http://www.emulator-zone.com/doc.php/gba/vboyadvance.html)|✔|✔|✔|✘|✘|
+|[VisualBoyAdvance](http://www.emulator-zone.com/doc.php/gba/vboyadvance.html)|✔|✔|✔|✔|✔|
 
 ### Flashcart
 
