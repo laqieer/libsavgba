@@ -67,7 +67,7 @@ int eeprom_read(u32 addr, u16 *data)
         data[i] = 0;
         for (int j = 0; j < 16; j++)
         {
-            data[i] += buffer[4 + 16 * (3 - i) + j] << (15 - j);
+            data[i] |= (buffer[4 + 16 * (3 - i) + j] & 1) << (15 - j);
         }
     }
 
