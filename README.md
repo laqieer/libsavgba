@@ -16,7 +16,7 @@ A library to access various backup media in GBA cartridges
 |[mGBA](https://mgba.io/)|✔|✔|✔|✔|✔|
 |[VisualBoyAdvance-M](https://vba-m.com/)|✔|✔|✔|✘|✘|
 |[NanoBoyAdvance](https://github.com/fleroviux/NanoBoyAdvance)|✔|✔|✔|✔|✔|
-|[No$GBA](https://www.nogba.com/)|✔|✔|✔|SST/Macronix/Panasonic ✔ Atmel ✘|Sanyo/Macronix ✔|
+|[No$GBA](https://www.nogba.com/)|✔|✔|✔|SST/Macronix/Panasonic ✔ Atmel ✘|✔|
 |[VisualBoyAdvance](http://www.emulator-zone.com/doc.php/gba/vboyadvance.html)|✔|✔|✔|✘|✘|
 
 ### Flashcart
