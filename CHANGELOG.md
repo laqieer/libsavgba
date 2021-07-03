@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/laqieer/libsavgba/compare/v3.0.0...v3.1.0) (2021-07-03)
+
+
+### Features
+
+* add backup media support for Atmel's Flash ([e77831e](https://github.com/laqieer/libsavgba/commit/e77831e90c007776125acbb92fd0556ccfd99596))
+
 ## [3.0.0](https://github.com/laqieer/libsavgba/compare/v2.0.0...v3.0.0) (2021-07-02)
 
 
