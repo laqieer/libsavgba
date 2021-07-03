@@ -2,7 +2,7 @@
 
 #include <gba_eeprom.h>
 
-#define BUFFER_SIZE 4
+#define BUFFER_SIZE 8
 
 int main(void) {
     int err;
@@ -39,9 +39,8 @@ int main(void) {
     if (err) {
         tte_printf("EEPROM(8KB) Read Error: %d\n", err);
     }
-    tte_write(buffer);
 
-    err = eeprom_read(1, buffer);
+    err = eeprom_read(1, &buffer[4]);
     if (err) {
         tte_printf("EEPROM(8KB) Read Error: %d\n", err);
     }
