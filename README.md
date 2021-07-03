@@ -11,7 +11,7 @@ A library to access various backup media in GBA cartridges
 
 ### Emulator
 
-|Save Type|SRAM/FRAM|EEPROM(512B)|EEPROM(8KB)|Flash(64KB)|Flash(128KB)|
+|Save Type|SRAM|EEPROM(512B)|EEPROM(8KB)|Flash(64KB)|Flash(128KB)|
 |---|---|---|---|---|---|
 |[mGBA](https://mgba.io/)|✔|✔|✔|✔|✔|
 |[VisualBoyAdvance-M](https://vba-m.com/)|✔|✔|✔|✘|✘|
@@ -21,7 +21,7 @@ A library to access various backup media in GBA cartridges
 
 ### Flashcart
 
-|Save Type|SRAM/FRAM|EEPROM(512B)|EEPROM(8KB)|Flash(64KB)|Flash(128KB)|
+|Save Type|SRAM|EEPROM(512B)|EEPROM(8KB)|Flash(64KB)|Flash(128KB)|
 |---|---|---|---|---|---|
 |[EZ-FLASH OMEGA](https://www.ezflash.cn/product/omega/)|✔|✔|✔|✔|✔|
 |[EverDrive-GBA X5](https://krikzz.com/store/home/42-everdrive-gba-x5.html)|✔|✘|✘|✔|✔|
