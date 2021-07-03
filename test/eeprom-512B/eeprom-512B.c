@@ -12,36 +12,38 @@ int main(void) {
 	
 	tte_init_chr4c_default(0, BG_CBB(0) | BG_SBB(31));
 
+    tte_init_con();
+
     // Init EEPROM
     err = eeprom_init(EEPROM_SIZE_512B);
     if (err) {
-        tte_write("EEPROM(512B) Init Failed!");
+        tte_printf("EEPROM(512B) Init Error: %d\n", err);
         goto end;
     }
 
     // Write Test
     err = eeprom_write(0, "EEPROM_Vnnn\n");
     if (err) {
-        tte_write("EEPROM(512B) Write Failed!");
+        tte_printf("EEPROM(512B) Write Error: %d\n", err);
         goto end;
     }
 
     err = eeprom_write(1, "nnn\n");
     if (err) {
-        tte_write("EEPROM(512B) Write Failed!");
+        tte_printf("EEPROM(512B) Write Error: %d\n", err);
         goto end;
     }
 
     // Read Test
     err = eeprom_read(0, buffer);
     if (err) {
-        tte_write("EEPROM(512B) Read Failed!");
+        tte_printf("EEPROM(512B) Read Error: %d\n", err);
     }
     tte_write(buffer);
 
     err = eeprom_read(1, buffer);
     if (err) {
-        tte_write("EEPROM(512B) Read Failed!");
+        tte_printf("EEPROM(512B) Read Error: %d\n", err);
     }
     tte_write(buffer);
 

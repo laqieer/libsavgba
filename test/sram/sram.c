@@ -12,17 +12,19 @@ int main(void) {
 	
 	tte_init_chr4c_default(0, BG_CBB(0) | BG_SBB(31));
 
+    tte_init_con();
+
     // Write Test
     err = sram_write(0, "SRAM_Vnnn\n", BUFFER_SIZE);
     if (err) {
-        tte_write("SRAM Write Failed!");
+        tte_printf("SRAM Write Error: %d\n", err);
         goto end;
     }
 
     // Read Test
     err = sram_read(0, buffer, BUFFER_SIZE);
     if (err) {
-        tte_write("SRAM Read Failed!");
+        tte_printf("SRAM Read Error: %d\n", err);
     }
     tte_write(buffer);
 
