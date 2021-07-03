@@ -201,6 +201,28 @@ int flash_write_byte(u32 addr, u8 data) {
     return wait_until(addr, &data, 20);
 }
 
+// Erase-and-Write 128 Bytes Sector (only Atmel devices)
+int flash_erase_and_write_atmel(u32 addr, u8 *data) {
+    // disable interrupts
+    u16 REG_IME_old = REG_IME;
+    REG_IME = 0;
+
+    // erase/write sector command
+    flash_mem[0x5555] = 0xAA;
+    flash_mem[0x2AAA] = 0x55;
+    flash_mem[0x5555] = 0xA0;
+
+    // write 128 bytes
+    for (int i = 0; i < 128 - (addr & 127); i++)
+        flash_mem[addr + i] = data[i];
+
+    // restore old IME state
+    REG_IME = REG_IME_old;
+
+    // wait until [E00xxxxh+7Fh]=dat[7Fh] (or timeout)
+    return wait_until(addr | 127, &data[127 - (addr & 127)], 20);
+}
+
 int flash_write(u32 addr, u8 *data, size_t size) {
     int err;
 
@@ -228,6 +250,11 @@ int flash_write(u32 addr, u8 *data, size_t size) {
 
     if (addr + size > FLASH_SIZE)
         return E_OUT_OF_RANGE;
+
+    if (gFlashInfo.manufacturer == FLASH_MFR_ATMEL)
+    {
+        return flash_erase_and_write_atmel(addr, data);
+    }
 
     err = flash_erase(addr);
     if (err)
