@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.1.2](https://github.com/laqieer/libsavgba/compare/v3.1.1...v3.1.2) (2021-07-03)
+
+
+### Bug Fixes
+
+* fix 512B EEPROM's compatibility with EverDrive-GBA X5 ([a2e9b30](https://github.com/laqieer/libsavgba/commit/a2e9b30ea6860bc5493453763aec923509671fed))
+
 ### [3.1.1](https://github.com/laqieer/libsavgba/compare/v3.1.0...v3.1.1) (2021-07-03)
 
 
