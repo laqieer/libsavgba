@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.1.1](https://github.com/laqieer/libsavgba/compare/v3.1.0...v3.1.1) (2021-07-03)
+
+
+### Bug Fixes
+
+* fix Flash's compatibility with vba and vba-m ([8f9d5e9](https://github.com/laqieer/libsavgba/commit/8f9d5e9ab1abd23f3e346a4106e841d2288722f5))
+
 ## [3.1.0](https://github.com/laqieer/libsavgba/compare/v3.0.0...v3.1.0) (2021-07-03)
 
 
