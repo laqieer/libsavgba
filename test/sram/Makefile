@@ -126,11 +126,10 @@ $(BUILD):
 #---------------------------------------------------------------------------------
 smoke:
 	@echo "=== smoke testing $(TARGET) ==="
-	@VisualBoyAdvance --no-pause-when-inactive --save-sram $(TARGET).gba &
-	@sleep 5
-	@ls
-	@sav=`head -1 $(TARGET).sav` echo $sav
-	@if [ "$sav" = "SRAM_Vnnn" ]; then echo "smoke testing passed!"; else echo "smoke testing failed!"; exit 1; fi
+	@mgba $(TARGET).gba &
+	@sleep 3
+	@head -1 $(TARGET).sav
+	@if [ `head -1 $(TARGET).sav` = "SRAM_Vnnn" ]; then echo "smoke testing passed!"; else echo "smoke testing failed!"; exit 1; fi
 	
 #---------------------------------------------------------------------------------
 clean:
