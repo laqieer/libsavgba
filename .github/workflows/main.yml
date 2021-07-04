@@ -40,4 +40,4 @@ jobs:
         run: make test
 
       - name: smoke testing
-        run: apt update && apt install -y xterm visualboyadvance && export TERM=xterm && sudo DEVKITPRO=/opt/devkitpro DEVKITARM=/opt/devkitpro/devkitARM make smoke
+        run: apt update && apt install -y xterm visualboyadvance && make smoke
