@@ -129,7 +129,7 @@ smoke:
 	@VisualBoyAdvance --no-pause-when-inactive --save-sram $(TARGET).gba &
 	@sleep 5
 	@ls
-	@sav=`head -1 ~/$(TARGET).sav` echo $sav
+	@sav=`head -1 $(TARGET).sav` echo $sav
 	@if [ "$sav" = "SRAM_Vnnn" ]; then echo "smoke testing passed!"; else echo "smoke testing failed!"; exit 1; fi
 	
 #---------------------------------------------------------------------------------
