@@ -38,3 +38,6 @@ jobs:
 
       - name: build test
         run: make test
+
+      - name: smoke testing
+        run: apt install -y visualboyadvance && make smoke
