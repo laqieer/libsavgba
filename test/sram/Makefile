@@ -126,7 +126,7 @@ $(BUILD):
 #---------------------------------------------------------------------------------
 smoke:
 	@echo "=== smoke testing $(TARGET) ==="
-	@VisualBoyAdvance --save-sram $(TARGET).gba &
+	@VisualBoyAdvance --no-pause-when-inactive --save-sram $(TARGET).gba &
 	@sleep 5
 	@ls
 	@sav=`head -1 $(TARGET).sav` echo $sav
