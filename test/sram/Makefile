@@ -126,7 +126,7 @@ $(BUILD):
 #---------------------------------------------------------------------------------
 smoke:
 	@echo "=== smoke testing $(TARGET) ==="
-	@vba --save-sram $(TARGET).gba
+	@VisualBoyAdvance --save-sram $(TARGET).gba
 	@sleep 5
 	@sav=`head -1 $(TARGET).sav` echo $sav
 	@if [ "$sav" = "SRAM_Vnnn" ]; then echo "smoke testing passed!"; else echo "smoke testing failed!"; fi
