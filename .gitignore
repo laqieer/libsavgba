@@ -7,6 +7,8 @@
 *.sav
 *.zip
 
+config.toml
+
 .DS_store
 
 .husky/
