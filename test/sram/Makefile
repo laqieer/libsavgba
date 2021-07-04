@@ -126,7 +126,7 @@ $(BUILD):
 #---------------------------------------------------------------------------------
 smoke:
 	@echo "=== smoke testing $(TARGET) ==="
-	@mgba $(TARGET).gba &
+	@mgba-sdl $(TARGET).gba &
 	@sleep 3
 	@head -1 $(TARGET).sav
 	@if [ `head -1 $(TARGET).sav` = "SRAM_Vnnn" ]; then echo "smoke testing passed!"; else echo "smoke testing failed!"; exit 1; fi
