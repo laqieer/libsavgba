@@ -116,13 +116,21 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES),-iquote $(CURDIR)/$(dir)) \
 
 export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib)
 
-.PHONY: $(BUILD) clean
+.PHONY: $(BUILD) smoke clean
 
 #---------------------------------------------------------------------------------
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
+#---------------------------------------------------------------------------------
+smoke:
+	@echo "=== smoke testing $(TARGET) ==="
+	@vba --save-sram $(TARGET).gba
+	@sleep 5
+	@sav=`head -1 $(TARGET).sav` echo $sav
+	@if [ "$sav" = "SRAM_Vnnn" ]; then echo "smoke testing passed!"; else echo "smoke testing failed!"; fi
+	
 #---------------------------------------------------------------------------------
 clean:
 	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).gba $(TARGET).sav

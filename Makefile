@@ -42,7 +42,7 @@ export DEPSDIR	:=	$(CURDIR)/build
 
 TESTS := $(wildcard test/*)
 
-.PHONY: $(BUILD) test docs version pack release clean $(TESTS)
+.PHONY: $(BUILD) test smoke docs version pack release clean $(TESTS)
 
 $(BUILD):
 	@[ -d lib ] || mkdir -p lib
@@ -52,6 +52,11 @@ $(BUILD):
 test: $(TESTS)
 $(TESTS):
 	$(MAKE) -C $@
+
+smoke:
+	@for dir in $(TESTS); do \
+		$(MAKE) -C $$dir -f Makefile $@; \
+	done
 
 docs:
 	@doxygen
