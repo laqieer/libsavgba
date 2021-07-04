@@ -40,4 +40,4 @@ jobs:
         run: make test
 
       - name: smoke testing
-        run: apt update && apt install -y visualboyadvance && make smoke
+        run: apt update && apt install -y visualboyadvance && export TERM=xterm && make smoke
