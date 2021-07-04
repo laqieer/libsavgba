@@ -40,4 +40,4 @@ jobs:
         run: make test
 
       - name: smoke testing
-        run: wget https://github.com/fleroviux/NanoBoyAdvance/releases/download/1.3/NanoboyAdvance-1.3-linux.zip && unzip NanoboyAdvance-1.3-linux.zip && chmod +x NanoboyAdvance && wget https://cdn.discordapp.com/attachments/682141375587680274/861273783498178560/bios.bin && apt update && apt install -y libsdl2-dev libglew-dev && PATH="`pwd`:$PATH" make smoke
+        run: wget https://github.com/fleroviux/NanoBoyAdvance/releases/download/1.3/NanoboyAdvance-1.3-linux.zip && unzip NanoboyAdvance-1.3-linux.zip && chmod +x NanoboyAdvance && wget https://cdn.discordapp.com/attachments/682141375587680274/861273783498178560/bios.bin && apt update && apt install -y libsdl2-dev libglew-dev && ls -l /usr/lib/libGLEW.so* && PATH="`pwd`:$PATH" make smoke
