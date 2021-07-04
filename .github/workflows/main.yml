@@ -40,4 +40,4 @@ jobs:
         run: make test
 
       - name: smoke testing
-        run: wget https://github.com/mgba-emu/mgba/releases/download/0.9.1/mGBA-0.9.1-ubuntu64-focal.tar.xz && tar -xvJf mGBA-0.9.1-ubuntu64-focal.tar.xz && apt update && apt install -y mGBA-0.9.1-ubuntu64-focal/libmgba.deb mGBA-0.9.1-ubuntu64-focal/mgba-sdl.deb && make smoke
+        run: wget https://github.com/mgba-emu/mgba/releases/download/0.9.1/mGBA-0.9.1-ubuntu64-focal.tar.xz && tar -xvJf mGBA-0.9.1-ubuntu64-focal.tar.xz && apt update && apt install -y ./mGBA-0.9.1-ubuntu64-focal/libmgba.deb ./mGBA-0.9.1-ubuntu64-focal/mgba-sdl.deb && make smoke
