@@ -116,21 +116,13 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES),-iquote $(CURDIR)/$(dir)) \
 
 export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib)
 
-.PHONY: $(BUILD) smoke clean
+.PHONY: $(BUILD) clean
 
 #---------------------------------------------------------------------------------
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
-#---------------------------------------------------------------------------------
-smoke:
-	@echo "=== smoke testing $(TARGET) ==="
-	@NanoboyAdvance --bios ../../bios.bin --save-type sram $(TARGET).gba &
-	@sleep 3
-	@head -1 $(TARGET).sav
-	@if [ `head -1 $(TARGET).sav` = "SRAM_Vnnn" ]; then echo "smoke testing passed!"; else echo "smoke testing failed!"; exit 1; fi
-	
 #---------------------------------------------------------------------------------
 clean:
 	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).gba $(TARGET).sav
