@@ -40,4 +40,4 @@ jobs:
         run: make test
 
       - name: smoke testing
-        run: wget https://github.com/fleroviux/NanoBoyAdvance/releases/download/1.3/NanoboyAdvance-1.3-linux.zip && apt update && apt install -y unzip && unzip NanoboyAdvance-1.3-linux.zip && wget https://cdn.discordapp.com/attachments/682141375587680274/861273783498178560/bios.bin && PATH="`pwd`/NanoboyAdvance-1.3-linux:${{PATH}}" make smoke
+        run: wget https://github.com/fleroviux/NanoBoyAdvance/releases/download/1.3/NanoboyAdvance-1.3-linux.zip && apt update && apt install -y unzip && unzip NanoboyAdvance-1.3-linux.zip && wget https://cdn.discordapp.com/attachments/682141375587680274/861273783498178560/bios.bin && PATH="`pwd`/NanoboyAdvance-1.3-linux:$PATH" make smoke
