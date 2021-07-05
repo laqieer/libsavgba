@@ -9,6 +9,9 @@
 #define FLASH_SIZE 0x10000
 #define flash_mem ((vu8*)MEM_FLASH)
 
+#define FLASH_SECTOR_SIZE_4KB 4096 // all device types, except Atmel
+#define FLASH_SECTOR_SIZE_128B 128 // only Atmel devices
+
 #define LOOP_CNT_PER_MILLI_SECOND 1000
 
 enum FlashCmd {
@@ -224,14 +227,73 @@ int flash_erase_and_write_atmel(u32 addr, u8 *data) {
     FLASH_CMD(FLASH_CMD_WRITE);
 
     // write 128 bytes
-    for (int i = 0; i < 128 - (addr & 127); i++)
+    for (int i = 0; i < FLASH_SECTOR_SIZE_128B - (addr & (FLASH_SECTOR_SIZE_128B - 1)); i++)
         flash_mem[addr + i] = data[i];
 
     // restore old IME state
     REG_IME = REG_IME_old;
 
     // wait until [E00xxxxh+7Fh]=dat[7Fh] (or timeout)
-    return wait_until(addr | 127, &data[127 - (addr & 127)], 20);
+    return wait_until(addr | (FLASH_SECTOR_SIZE_128B - 1), &data[(FLASH_SECTOR_SIZE_128B - 1) - (addr & (FLASH_SECTOR_SIZE_128B - 1))], 20);
+}
+
+int flash_write_common(u32 addr, u8 *data, size_t size) {
+    int err;
+    int sectors;
+
+    err = flash_erase(addr);
+    if (err)
+        return err;
+
+    sectors = (addr % FLASH_SECTOR_SIZE_4KB + size) / FLASH_SECTOR_SIZE_4KB;
+    if ((addr % FLASH_SECTOR_SIZE_4KB + size) % FLASH_SECTOR_SIZE_4KB != 0)
+        sectors++;
+
+    for (int i = 0; i < sectors; i++) {
+        err = flash_erase(addr + i * FLASH_SECTOR_SIZE_4KB);
+        if (err)
+            return err;
+    }
+
+    for(int i = 0; i < size; i++) {
+        err = flash_write_byte(addr + i, data[i]);
+
+        if (err)
+            return err;
+    }
+
+    return 0;
+}
+
+int flash_write_atmel(u32 addr, u8 *data, size_t size) {
+    int err;
+    int sectors;
+
+    if (addr % FLASH_SECTOR_SIZE_128B) {
+        err = flash_erase_and_write_atmel(addr, data);
+        if (err)
+            return err;
+
+        int written = FLASH_SECTOR_SIZE_128B - addr % FLASH_SECTOR_SIZE_128B;
+        if (written >= size)
+            return 0;
+
+        size -= written;
+        addr += written;
+        data += written;
+    }
+
+    sectors = size / FLASH_SECTOR_SIZE_128B;
+    if (size % FLASH_SECTOR_SIZE_128B)
+        sectors++;
+
+    for (int i = 0; i < sectors; i++) {
+        err = flash_erase_and_write_atmel(addr + i * FLASH_SECTOR_SIZE_128B, &data[i * FLASH_SECTOR_SIZE_128B]);
+        if (err)
+            return err;
+    }
+
+    return 0;
 }
 
 int flash_write(u32 addr, u8 *data, size_t size) {
@@ -264,19 +326,15 @@ int flash_write(u32 addr, u8 *data, size_t size) {
 
     if (gFlashInfo.manufacturer == FLASH_MFR_ATMEL)
     {
-        return flash_erase_and_write_atmel(addr, data);
+        err = flash_write_atmel(addr, data, size);
+    }
+    else
+    {
+        err = flash_write_common(addr, data, size);
     }
 
-    err = flash_erase(addr);
     if (err)
         return err;
-
-    for(int i = 0; i < size; i++) {
-        err = flash_write_byte(addr + i, data[i]);
-
-        if (err)
-            return err;
-    }
 
     if (flash_absmemcmp(&flash_mem[addr], data, size))
         return E_VERIFY_FAIL;
