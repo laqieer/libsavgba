@@ -74,7 +74,7 @@ int eeprom_read(u32 addr, u16 *data)
     return 0;
 }
 
-int eeprom_write(u32 addr, u16 *data)
+int eeprom_write_only(u32 addr, u16 *data)
 {
     u16 buffer[81];
 
@@ -112,4 +112,23 @@ int eeprom_write(u32 addr, u16 *data)
             return 0;
 
     return E_TIMEOUT;
+}
+
+int eeprom_write(u32 addr, u16 *data)
+{
+    int err;
+    u16 buffer[4];
+
+    err = eeprom_write_only(addr, data);
+    if (err)
+        return err;
+
+    err = eeprom_read(addr, buffer);
+    if (err)
+        return err;
+
+    if (data[0] != buffer[0] || data[1] != buffer[1] ||data[2] != buffer[2] ||data[3] != buffer[3])
+        return E_VERIFY_FAIL;
+
+    return 0;
 }
