@@ -11,6 +11,19 @@
 
 #define LOOP_CNT_PER_MILLI_SECOND 1000
 
+enum FlashCmd {
+    FLASH_CMD_ERASE_CHIP = 1,
+    FLASH_CMD_ERASE_SECTOR = 3,
+    FLASH_CMD_ERASE = 8,
+    FLASH_CMD_ENTER_ID_MODE = 9,
+    FLASH_CMD_WRITE = 0xA,
+    FLASH_CMD_SWITCH_BANK = 0xB,
+    FLASH_CMD_LEAVE_ID_MODE = 0xF,
+};
+
+#define FLASH_CMD_BEGIN flash_mem[0x5555] = 0xAA; flash_mem[0x2AAA] = 0x55;
+#define FLASH_CMD(cmd) FLASH_CMD_BEGIN; flash_mem[0x5555] = (cmd) << 4;
+
 const unsigned char erased_byte_value = 0xFF;
 const unsigned char erased_byte_value_vba = 0;
 
@@ -65,9 +78,7 @@ int flash_init(u8 size) {
     REG_WAITCNT |= WS_SRAM_8;
 
     // enter ID mode
-    flash_mem[0x5555] = 0xAA;
-    flash_mem[0x2AAA] = 0x55;
-    flash_mem[0x5555] = 0x90;
+    FLASH_CMD(FLASH_CMD_ENTER_ID_MODE);
 
     // one minor thing the atmel docs say: you have to wait 20ms when entering or exiting ID mode.
     wait(20);
@@ -77,9 +88,7 @@ int flash_init(u8 size) {
     flash_memcpy(&gFlashInfo.manufacturer, &flash_mem[0], 1);
 
     // terminate ID mode
-    flash_mem[0x5555] = 0xAA;
-    flash_mem[0x2AAA] = 0x55;
-    flash_mem[0x5555] = 0xF0;
+    FLASH_CMD(FLASH_CMD_LEAVE_ID_MODE);
 
     // one minor thing the atmel docs say: you have to wait 20ms when entering or exiting ID mode.
     wait(20);
@@ -87,7 +96,7 @@ int flash_init(u8 size) {
     // 128K sanyo flash needs to have the "exit ID mode" written TWICE to work. If you only write it once, it will not exit ID mode.
     // 64K sanyo flash has the same device/manufacturer ID as the SST part.
     if (gFlashInfo.manufacturer == FLASH_MFR_SANYO)
-        flash_mem[0x5555] = 0xF0;
+        flash_mem[0x5555] = FLASH_CMD_LEAVE_ID_MODE << 4;
 
     gFlashInfo.size = 0;
 
@@ -115,14 +124,10 @@ int flash_reset() {
     int err;
 
     // erase command
-    flash_mem[0x5555] = 0xAA;
-    flash_mem[0x2AAA] = 0x55;
-    flash_mem[0x5555] = 0x80;
+    FLASH_CMD(FLASH_CMD_ERASE);
 
     // erase entire chip
-    flash_mem[0x5555] = 0xAA;
-    flash_mem[0x2AAA] = 0x55;
-    flash_mem[0x5555] = 0x10;
+    FLASH_CMD(FLASH_CMD_ERASE_CHIP);
 
     // wait until [E000000h]=FFh (or timeout)
     err = wait_until(0, &erased_byte_value, 20);
@@ -141,14 +146,11 @@ int flash_erase(u32 addr) {
     addr &= 0xF000;
 
     // erase command
-    flash_mem[0x5555] = 0xAA;
-    flash_mem[0x2AAA] = 0x55;
-    flash_mem[0x5555] = 0x80;
+    FLASH_CMD(FLASH_CMD_ERASE);
 
     // erase sector n
-    flash_mem[0x5555] = 0xAA;
-    flash_mem[0x2AAA] = 0x55;
-    flash_mem[addr] = 0x30;
+    FLASH_CMD_BEGIN
+    flash_mem[addr] = FLASH_CMD_ERASE_SECTOR << 4;
 
     // wait until [E00n000h]=FFh (or timeout)
     err = wait_until(addr, &erased_byte_value, 20);
@@ -162,9 +164,7 @@ int flash_erase(u32 addr) {
 // Bank Switching (devices bigger than 64K only)
 void flash_switch_bank(int bank) {
     // select bank command
-    flash_mem[0x5555] = 0xAA;
-    flash_mem[0x2AAA] = 0x55;
-    flash_mem[0x5555] = 0xB0;
+    FLASH_CMD(FLASH_CMD_SWITCH_BANK);
 
     // write bank number 0..1
     flash_mem[0] = bank;
@@ -205,9 +205,7 @@ int flash_read(u32 addr, u8 *data, size_t size) {
 // Write Single Data Byte (all device types, except Atmel)
 int flash_write_byte(u32 addr, u8 data) {
     // write byte command
-    flash_mem[0x5555] = 0xAA;
-    flash_mem[0x2AAA] = 0x55;
-    flash_mem[0x5555] = 0xA0;
+    FLASH_CMD(FLASH_CMD_WRITE);
 
     // write byte to address xxxx
     flash_mem[addr] = data;
@@ -223,9 +221,7 @@ int flash_erase_and_write_atmel(u32 addr, u8 *data) {
     REG_IME = 0;
 
     // erase/write sector command
-    flash_mem[0x5555] = 0xAA;
-    flash_mem[0x2AAA] = 0x55;
-    flash_mem[0x5555] = 0xA0;
+    FLASH_CMD(FLASH_CMD_WRITE);
 
     // write 128 bytes
     for (int i = 0; i < 128 - (addr & 127); i++)
