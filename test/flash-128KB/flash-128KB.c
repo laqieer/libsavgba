@@ -2,6 +2,7 @@
 
 #include <tonc.h>
 
+#include <err_def.h>
 #include <gba_flash.h>
 
 #define BUFFER_SIZE 50
@@ -19,27 +20,27 @@ int main(void) {
     // Init Flash
     err = flash_init(FLASH_SIZE_128KB);
     if (err) {
-        tte_printf("Flash(128KB) Init Error: %d\n", err);
+        tte_printf("Flash(128KB) Init Error: %s\n", SavErrMsgs[err]);
         goto end;
     }
 
     // Write Test
     err = flash_write(64 * 1024, "FLASH1M_Vnnn\n", BUFFER_SIZE);
     if (err) {
-        tte_printf("Flash(128KB) Write Error: %d\n", err);
+        tte_printf("Flash(128KB) Write Error: %s\n", SavErrMsgs[err]);
         goto end;
     }
 
     err = flash_write(0, "Error: 0x0E010000 is mirrored to 0x0E000000\n", BUFFER_SIZE);
     if (err) {
-        tte_printf("Flash(128KB) Write Error: %d\n", err);
+        tte_printf("Flash(128KB) Write Error: %s\n", SavErrMsgs[err]);
         goto end;
     }
 
     // Read Test
     err = flash_read(64 * 1024, buffer, BUFFER_SIZE);
     if (err) {
-        tte_printf("Flash(128KB) Read Error: %d\n", err);
+        tte_printf("Flash(128KB) Read Error: %s\n", SavErrMsgs[err]);
     }
     tte_write(buffer);
 

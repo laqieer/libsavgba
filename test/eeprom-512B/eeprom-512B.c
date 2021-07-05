@@ -1,5 +1,6 @@
 #include <tonc.h>
 
+#include <err_def.h>
 #include <gba_eeprom.h>
 
 #define BUFFER_SIZE 8
@@ -17,32 +18,32 @@ int main(void) {
     // Init EEPROM
     err = eeprom_init(EEPROM_SIZE_512B);
     if (err) {
-        tte_printf("EEPROM(512B) Init Error: %d\n", err);
+        tte_printf("EEPROM(512B) Init Error: %s\n", SavErrMsgs[err]);
         goto end;
     }
 
     // Write Test
     err = eeprom_write(0, "EEPROM_Vnnn\n");
     if (err) {
-        tte_printf("EEPROM(512B) Write Error: %d\n", err);
+        tte_printf("EEPROM(512B) Write Error: %s\n", SavErrMsgs[err]);
         goto end;
     }
 
     err = eeprom_write(1, "nnn\n");
     if (err) {
-        tte_printf("EEPROM(512B) Write Error: %d\n", err);
+        tte_printf("EEPROM(512B) Write Error: %s\n", SavErrMsgs[err]);
         goto end;
     }
 
     // Read Test
     err = eeprom_read(0, buffer);
     if (err) {
-        tte_printf("EEPROM(512B) Read Error: %d\n", err);
+        tte_printf("EEPROM(512B) Read Error: %s\n", SavErrMsgs[err]);
     }
 
     err = eeprom_read(1, &buffer[4]);
     if (err) {
-        tte_printf("EEPROM(512B) Read Error: %d\n", err);
+        tte_printf("EEPROM(512B) Read Error: %s\n", SavErrMsgs[err]);
     }
     tte_write(buffer);
 

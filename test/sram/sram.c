@@ -1,5 +1,6 @@
 #include <tonc.h>
 
+#include <err_def.h>
 #include <gba_sram.h>
 
 #define BUFFER_SIZE 50
@@ -17,14 +18,14 @@ int main(void) {
     // Write Test
     err = sram_write(0, "SRAM_Vnnn\n", BUFFER_SIZE);
     if (err) {
-        tte_printf("SRAM Write Error: %d\n", err);
+        tte_printf("SRAM Write Error: %s\n", SavErrMsgs[err]);
         goto end;
     }
 
     // Read Test
     err = sram_read(0, buffer, BUFFER_SIZE);
     if (err) {
-        tte_printf("SRAM Read Error: %d\n", err);
+        tte_printf("SRAM Read Error: %s\n", SavErrMsgs[err]);
     }
     tte_write(buffer);
 

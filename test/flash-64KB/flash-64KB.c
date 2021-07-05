@@ -1,5 +1,6 @@
 #include <tonc.h>
 
+#include <err_def.h>
 #include <gba_flash.h>
 
 #define BUFFER_SIZE 50
@@ -17,21 +18,21 @@ int main(void) {
     // Init Flash
     err = flash_init(FLASH_SIZE_64KB);
     if (err) {
-        tte_printf("Flash(64KB) Init Error: %d\n", err);
+        tte_printf("Flash(64KB) Init Error: %s\n", SavErrMsgs[err]);
         goto end;
     }
 
     // Write Test
     err = flash_write(0, "FLASH512_Vnnn\n", BUFFER_SIZE);
     if (err) {
-        tte_printf("Flash(64KB) Write Error: %d\n", err);
+        tte_printf("Flash(64KB) Write Error: %s\n", SavErrMsgs[err]);
         goto end;
     }
 
     // Read Test
     err = flash_read(0, buffer, BUFFER_SIZE);
     if (err) {
-        tte_printf("Flash(64KB) Read Error: %d\n", err);
+        tte_printf("Flash(64KB) Read Error: %s\n", SavErrMsgs[err]);
     }
     tte_write(buffer);
 
