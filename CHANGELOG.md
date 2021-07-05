@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/laqieer/libsavgba/compare/v3.1.2...v3.2.0) (2021-07-05)
+
+
+### Features
+
+* add an extra tool: detect-save-type ([da45a5a](https://github.com/laqieer/libsavgba/commit/da45a5ac5fd289291910426b7f5c9a70cf57ac7a))
+
 ### [3.1.2](https://github.com/laqieer/libsavgba/compare/v3.1.1...v3.1.2) (2021-07-03)
 
 
