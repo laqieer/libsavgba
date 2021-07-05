@@ -39,5 +39,9 @@ A library to access various backup media in GBA cartridges
 
 `make`
 
+## Extra
+
+[detect-save-type](https://github.com/laqieer/libsavgba/tree/main/test/detect-save-type)
+
 ## License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flaqieer%2Flibsavgba.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Flaqieer%2Flibsavgba?ref=badge_large)
