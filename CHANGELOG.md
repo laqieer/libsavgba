@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.3.0](https://github.com/laqieer/libsavgba/compare/v3.2.0...v3.3.0) (2021-07-05)
+
+
+### Features
+
+* add support to show error codes and error messages ([9e21e59](https://github.com/laqieer/libsavgba/commit/9e21e59eaef13059e55fce8d11c9d55fce0b8396))
+* add verify in eeprom_write ([3fbd992](https://github.com/laqieer/libsavgba/commit/3fbd99282c2e81549b0799ce06f054d6c90864e2))
+* support cross-sector flash write ([0c7e19a](https://github.com/laqieer/libsavgba/commit/0c7e19a760c577e2975a0e9b75701f855c8480e8))
+
 ## [3.2.0](https://github.com/laqieer/libsavgba/compare/v3.1.2...v3.2.0) (2021-07-05)
 
 
