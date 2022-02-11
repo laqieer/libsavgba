@@ -36,6 +36,17 @@ struct FlashInfo {
     u8 size;
 } gFlashInfo;
 
+const struct FlashInfo flash_chips[] = {
+    {FLASH_DEV_MX29L512, FLASH_MFR_MACRONIX, FLASH_SIZE_64KB},
+    {FLASH_DEV_MN63F805MNP, FLASH_MFR_PANASONIC, FLASH_SIZE_64KB},
+    {FLASH_DEV_LE39FW512, FLASH_MFR_SST, FLASH_SIZE_64KB},
+    {FLASH_DEV_AT29LV512, FLASH_MFR_ATMEL, FLASH_SIZE_64KB},
+    {FLASH_DEV_MX29L010, FLASH_MFR_MACRONIX, FLASH_SIZE_128KB},
+    {FLASH_DEV_LE26FV10N1TS, FLASH_MFR_SANYO, FLASH_SIZE_128KB},
+};
+
+#define FLASH_CHIP_NUM sizeof(flash_chips) / sizeof(flash_chips[0])
+
 IWRAM_CODE
 static void flash_memcpy(volatile unsigned char *dst, const volatile unsigned char *src, size_t size) {
     for (;size > 0;--size) 
@@ -103,15 +114,11 @@ int flash_init(u8 size) {
 
     gFlashInfo.size = 0;
 
-    if ((gFlashInfo.manufacturer == FLASH_MFR_MACRONIX && gFlashInfo.device == FLASH_DEV_MX29L512) || 
-            (gFlashInfo.manufacturer == FLASH_MFR_PANASONIC && gFlashInfo.device == FLASH_DEV_MN63F805MNP) || 
-            (gFlashInfo.manufacturer == FLASH_MFR_SST && gFlashInfo.device == FLASH_DEV_LE39FW512) || 
-            (gFlashInfo.manufacturer == FLASH_MFR_ATMEL && gFlashInfo.device == FLASH_DEV_AT29LV512))
-        gFlashInfo.size = FLASH_SIZE_64KB;
-
-    if ((gFlashInfo.manufacturer == FLASH_MFR_MACRONIX && gFlashInfo.device == FLASH_DEV_MX29L010) || 
-            (gFlashInfo.manufacturer == FLASH_MFR_SANYO && gFlashInfo.device == FLASH_DEV_LE26FV10N1TS))
-        gFlashInfo.size = FLASH_SIZE_128KB;
+    for (int i = 0; i < FLASH_CHIP_NUM; i++) {
+        if (gFlashInfo.manufacturer == flash_chips[i].manufacturer && gFlashInfo.device == flash_chips[i].device) {
+            gFlashInfo.size = flash_chips[i].size;
+        }
+    }
 
     if (size)
         gFlashInfo.size = size;
