@@ -38,3 +38,10 @@ jobs:
 
       - name: build test
         run: make test
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: library
+          path: |
+            lib/libsavgba.a
+            test/detect-save-type/detect-save-type.gba
