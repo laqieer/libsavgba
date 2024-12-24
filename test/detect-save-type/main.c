@@ -22,11 +22,11 @@ int main(void) {
     tte_init_con();
 
     // Test SRAM
-    err = sram_write(0, "S", 1);
+    err = sram_write(0, (u8 *)"S", 1);
     if (!err) {
         tte_printf("Save Type: SRAM\n");
-        sram_write(0x8000, "R", 1);
-        char a = '\0';
+        sram_write(0x8000, (u8 *)"R", 1);
+        u8 a = '\0';
         sram_read(0, &a, 1);
         switch (a) {
             case 'R':

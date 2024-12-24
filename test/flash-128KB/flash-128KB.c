@@ -12,7 +12,7 @@ int main(void) {
 	u8 buffer[BUFFER_SIZE];
 
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0;
-	
+
 	tte_init_chr4c_default(0, BG_CBB(0) | BG_SBB(31));
 
     tte_init_con();
@@ -25,13 +25,13 @@ int main(void) {
     }
 
     // Write Test
-    err = flash_write(64 * 1024, "FLASH1M_Vnnn\n", BUFFER_SIZE);
+    err = flash_write(64 * 1024, (u8 *)"FLASH1M_Vnnn\n", BUFFER_SIZE);
     if (err) {
         tte_printf("Flash(128KB) Write Error: %s\n", SavErrMsgs[err]);
         goto end;
     }
 
-    err = flash_write(0, "Error: 0x0E010000 is mirrored to 0x0E000000\n", BUFFER_SIZE);
+    err = flash_write(0, (u8 *)"Error: 0x0E010000 is mirrored to 0x0E000000\n", BUFFER_SIZE);
     if (err) {
         tte_printf("Flash(128KB) Write Error: %s\n", SavErrMsgs[err]);
         goto end;
@@ -42,7 +42,7 @@ int main(void) {
     if (err) {
         tte_printf("Flash(128KB) Read Error: %s\n", SavErrMsgs[err]);
     }
-    tte_write(buffer);
+    tte_write((char *)buffer);
 
     // Final Result
     if (memcmp(buffer, "FLASH1M_Vnnn\n", 12) == 0)
@@ -55,5 +55,5 @@ end:
 	while (1) {
 		VBlankIntrWait();
 	}
-	
+
 }

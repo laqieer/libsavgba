@@ -10,7 +10,7 @@ int main(void) {
 	u16 buffer[BUFFER_SIZE];
 
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0;
-	
+
 	tte_init_chr4c_default(0, BG_CBB(0) | BG_SBB(31));
 
     tte_init_con();
@@ -23,13 +23,13 @@ int main(void) {
     }
 
     // Write Test
-    err = eeprom_write(0, "EEPROM_Vnnn\n");
+    err = eeprom_write(0, (u16 *)"EEPROM_Vnnn\n");
     if (err) {
         tte_printf("EEPROM(8KB) Write Error: %s\n", SavErrMsgs[err]);
         goto end;
     }
 
-    err = eeprom_write(1, "nnn\n");
+    err = eeprom_write(1, (u16 *)"nnn\n");
     if (err) {
         tte_printf("EEPROM(8KB) Write Error: %s\n", SavErrMsgs[err]);
         goto end;
@@ -45,7 +45,7 @@ int main(void) {
     if (err) {
         tte_printf("EEPROM(8KB) Read Error: %s\n", SavErrMsgs[err]);
     }
-    tte_write(buffer);
+    tte_write((char *)buffer);
 
     // Final Result
     tte_write("EEPROM(8KB) Test Passed!");
@@ -57,5 +57,5 @@ end:
 	while (1) {
 		VBlankIntrWait();
 	}
-	
+
 }
