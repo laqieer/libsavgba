@@ -16,7 +16,7 @@ int main(void) {
     int err;
 
 	REG_DISPCNT = DCNT_MODE0 | DCNT_BG0;
-	
+
 	tte_init_chr4c_default(0, BG_CBB(0) | BG_SBB(31));
 
     tte_init_con();
@@ -64,9 +64,9 @@ int main(void) {
             goto end;
         }
     }
-    
+
     // Test Flash
-    tte_printf("Save Type: Flash\n", err);
+    tte_printf("Save Type: Flash\n");
     err = flash_init(FLASH_SIZE_AUTO);
     tte_printf("Manufacturer ID: %X\nDevice ID: %X\n", gFlashInfo.manufacturer, gFlashInfo.device);
     switch (gFlashInfo.size) {
@@ -88,5 +88,5 @@ end:
 	while (1) {
 		VBlankIntrWait();
 	}
-	
+
 }
